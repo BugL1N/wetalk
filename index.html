@@ -31,7 +31,6 @@
             /* Firefox 3.6 - 15 */
             background: linear-gradient(#57E7B3, #42C6C0);
             /* 标准的语法 */
-            /*background : #57E7B3;*/
             width: 100%;
             height: 300px;
         }
@@ -43,25 +42,50 @@
         }
         
         #page {
-            /*width: 940px; */
             width: 100%;
             height: 400px;
             padding: 20px;
-            /*margin: 0 auto; */
             background: white;
         }
         
         .panel {
             display: none;
             width: 240px;
-            /*padding: 20px;*/
-            /*background-color: #333;*/
             color: #000;
             box-shadow: inset 0 0 5px 5px #222;
         }
-        /*.container-left {
+        
+        #left-panel-hd {
+            width: 240px;
+            height: 200px;
             position: relative;
-        }*/
+            background: url(images/qiye.jpg) 0;
+            background-size: cover;
+        }
+        
+        #user-container {
+            width: 240px;
+            height: 200px;
+            position: relative;
+            background: hsla(0, 0%, 100%, .3);
+            overflow: hidden;
+        }
+        
+        #user-container::before {
+            background: url(images/qiye.jpg);
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            filter: blur(20px);
+            margin: -30px;
+        }
+        
+        .header-bd a {
+            color: #ffffff;
+        }
     </style>
 </head>
 
@@ -99,23 +123,39 @@
     <!-- 右边主界面 -->
     <div class="page" style="">
         <div id="container-main" class="page page-current" style="">
-            <div class="main-hd" style="background-color: pink;height: 150px;">
+            <div class="main-hd" style="height: 150px;">
                 <div class="weui-flex" style="width: 100%;height: 50px;">
-                    <div class="header-hd" style="width: 10%;text-align: center;">
-                        <!-- <button id="menu-buttun" >sansasa</button> -->
-                        <a id="left-panel-link" href="#left-panel" style="font-size: 30px;padding-left: 10px;">
-                            <i class="iconfont" style="font-size: 26px;color:#3879d9;">&#xe607;</i>
-                        </a>
-
-                    </div>
-                    <div style="width: 90%; text-align: center;">
-                        <div class="search-input" style="padding-top: 10px;">
-                            <!-- <input type="search" id="search" placeholder="输入关键字..." style="font-size: 18px;border-radius: 5PX;width: 80%;"> -->
-                            <input type="search" id="search" placeholder="输入关键字..." style="border: none;outline: none;padding: 5px 10px;font-size: 18px;width: 90%;border-radius: 25px;">
+                    <div class="weui-flex" style="width: 100%;">
+                        <div>
+                            <div class="placeholder">
+                                <div class="header-hd" style="text-align: center;">
+                                    <a id="left-panel-link" href="#left-panel" style="font-size: 30px;padding-left: 10px;">
+                                        <i class="iconfont" style="font-size: 26px;color:#FFFFFF;">&#xe607;</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-flex__item">
+                            <div class="placeholder">
+                                <div style="width: 100%; text-align: center;">
+                                    <div class="search-input" style="padding-top: 10px;">
+                                        <input type="search" id="search" placeholder="输入关键字..." style="border: none;outline: none;padding: 5px 10px;font-size: 18px;width: 90%;border-radius: 25px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="placeholder">
+                                <div class="header-hd" style="text-align: center;padding-right: 10px;">
+                                    <a id="" href="fatie.html" style="font-size: 30px;">
+                                        <i class="iconfont" style="font-size: 26px;color:#FFFFFF;">&#xe6fd;</i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="header-bd" style="height:80px;width: 100%;padding-top: 25px;">
+                <div class="header-bd" style="height:80px;width: 100%;padding-top: 25px;color: #ffffff;">
                     <div class="weui-flex" style="height: 70px;padding-top: 5px;">
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;border-right: 1px solid #E8E8E8;">
@@ -219,7 +259,7 @@
                             <div class="weui-media-box weui-media-box_text" style="padding: 10px 15px;">
                                 <h4 class="weui-media-box__title">标题</h4>
                                 <p class="weui-media-box__desc">桌布*2（正方形、长方形）;扫帚簸箕;清洁球;拖把;水桶;水盆;</p>
-                                <img src="images/ppt.png" style="height: 64px;">
+                                <img src="images/ppt.png" style="height: 64px;padding: 5px;">
                             </div>
                             <div class="weui-media-box" style="height: 30px;padding: 5px 15px;">
                                 <div class="weui_media_bd">
@@ -228,8 +268,9 @@
                                             <a href="" style=""><i class="iconfont" style="font-size: 18px;">&#xe816;</i>已收藏</a>
                                         </div>
                                         <div class="weui-flex__item" style="text-align: center;">
-                                            <i class="iconfont">&#xe79f;</i>
-                                            <a href="" style="">huifu</a>
+                                            <a style="">
+                                                <i class="iconfont" style="font-size: 20px;color: #a3a3a3;">&#xe79f;</i>1
+                                            </a>
                                         </div>
                                         <div class="weui-flex__item" style="text-align: right;">
                                             <i class="iconfont">&#xe603;</i>
@@ -277,10 +318,12 @@
                                             <a href="" style=""><i class="iconfont" style="font-size: 18px;">&#xe815;</i>收藏</a>
                                         </div>
                                         <div class="weui-flex__item" style="text-align: center;">
-                                            <a href="" style="">huifu</a>
+                                            <a style="">
+                                                <i class="iconfont" style="font-size: 20px;color: #a3a3a3;">&#xe79f;</i>1
+                                            </a>
                                         </div>
                                         <div class="weui-flex__item" style="text-align: right;">
-                                            <a href="" style="">shoucang</a>
+                                            <a href="" style=""><i class="iconfont" style="font-size: 18px;">&#xe63a;</i>收藏</a>
                                         </div>
                                     </div>
                                 </div>
@@ -295,31 +338,34 @@
         </div>
     </div>
     <!-- 左边菜单栏 -->
-    <div id="left-panel" class="panel" style="">
+    <div id="left-panel" class="panel" style="display: none;">
         <div style="height: 100%;background-color: #DEDEDE;width: 240px;">
-            <div style="">
-                <div style="padding-top: 100px;display: inline-block;">
-                    <div class="weui_panel_bd page__bd_spacing">
-                        <div class="weui_media_box weui_media_appmsg" style="padding:5px;">
-                            <div class="weui_media_hd">
-                                <div style="width:70px; height:70px;">
-                                    <div style="width: 64px; height: 64px; float:left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;">
-                                        <img src="images/qiye.jpg" width="64" height="64" />
+            <div id="left-panel-hd" style="">
+                <div id="user-container">
+                    <div id="" style="padding-top: 100px;display: inline-block;width: 100%;">
+                        <div class="weui_panel_bd page__bd_spacing">
+                            <div class="weui_media_box weui_media_appmsg" style="padding:5px;">
+                                <div class="weui_media_hd">
+                                    <div style="width:70px; height:70px;">
+                                        <div style="width: 64px; height: 64px; float:left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;">
+                                            <img src="images/qiye.jpg" width="64" height="64" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="weui_media_bd">
-                                <h5 class="weui_media_title">用户名</h5>
-                                <div class="weui-flex">
-                                    <h5>体验用户</h5>
+                                <div class="weui_media_bd">
+                                    <h5 class="weui_media_title">用户名</h5>
+                                    <div class="weui-flex">
+                                        <h5>体验用户</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
-            <div class="weui-cells">
+            <div class="weui-cells" style="margin-top:5px;">
                 <a class="weui-cell weui-cell_access" href="javascript:;">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width:20px;margin-right:9px;">&#xe613;</i>
@@ -392,6 +438,15 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__hd">
+                        <i class="iconfont" style="color: #59CAC6;width: 25px;margin-right: 9px;">&#xe6fd;</i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>我要发帖</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                </a>
             </div>
         </div>
     </div>
@@ -402,10 +457,15 @@
     <script src="js/jquery.panelslider.min.js"></script>
     <script src="js/url.js"></script>
     <script>
-        $('#left-panel-link').panelslider();
         $("#left-panel-link").bind('click').click(function() {
-            $("#container-main").addClass("posit_flix");
+            var display = $("#left-panel").css("display");
+            if (display == "block") {
+                $("#container-main").removeClass("posit_flix");
+            } else {
+                $("#container-main").addClass("posit_flix");
+            }
         })
+        $('#left-panel-link').panelslider();
     </script>
     <script src="js/wetalk.js"></script>
 

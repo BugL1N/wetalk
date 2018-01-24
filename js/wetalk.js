@@ -1,5 +1,5 @@
 // 搜索
-$(function(){
+$(function() {
     var $searchBar = $('#searchBar'),
         $searchResult = $('#searchResult'),
         $searchText = $('#searchText'),
@@ -7,40 +7,45 @@ $(function(){
         $searchClear = $('#searchClear'),
         $searchCancel = $('#searchCancel');
 
-    function hideSearchResult(){
+    function hideSearchResult() {
         $searchResult.hide();
         $searchInput.val('');
     }
-    function cancelSearch(){
+
+    function cancelSearch() {
         hideSearchResult();
         $searchBar.removeClass('weui-search-bar_focusing');
         $searchText.show();
     }
 
-    $searchText.on('click', function(){
+    $searchText.on('click', function() {
         $searchBar.addClass('weui-search-bar_focusing');
         $searchInput.focus();
     });
-    $searchInput.on('blur', function () {
-            if(!this.value.length) cancelSearch();
+    $searchInput.on('blur', function() {
+            if (!this.value.length) cancelSearch();
         })
-        .on('input', function(){
-            if(this.value.length) {
+        .on('input', function() {
+            if (this.value.length) {
                 $searchResult.show();
             } else {
                 $searchResult.hide();
             }
-    });
-    $searchClear.on('click', function(){
+        });
+    $searchClear.on('click', function() {
         hideSearchResult();
         $searchInput.focus();
     });
-    $searchCancel.on('click', function(){
+    $searchCancel.on('click', function() {
         cancelSearch();
         $searchInput.blur();
     });
 });
 
+
+// function getiezilist(params) {
+
+// }
 
 
 //上传图片
@@ -146,4 +151,3 @@ $(function() {
         }
     });
 });
-
