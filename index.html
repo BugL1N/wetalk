@@ -13,79 +13,6 @@
         body {
             background-color: #EFEFF5;
         }
-        
-        .weui_media_box:before {
-            left: 0;
-        }
-        
-        .list_contentbox {
-            border-top: 1px solid #E5E5E5;
-        }
-        
-        .main-hd {
-            background: -webkit-linear-gradient(#57E7B3, #42C6C0);
-            /* Safari 5.1 - 6.0 */
-            background: -o-linear-gradient(#57E7B3, #42C6C0);
-            /* Opera 11.1 - 12.0 */
-            background: -moz-linear-gradient(#57E7B3, #42C6C0);
-            /* Firefox 3.6 - 15 */
-            background: linear-gradient(#57E7B3, #42C6C0);
-            /* 标准的语法 */
-            width: 100%;
-            height: 300px;
-        }
-        /*定位*/
-        
-        .posit_flix {
-            position: fixed;
-            width: 100%;
-        }
-        
-        #page {
-            width: 100%;
-            height: 400px;
-            padding: 20px;
-            background: white;
-        }
-        
-        .panel {
-            display: none;
-            width: 240px;
-            color: #000;
-            box-shadow: inset 0 0 5px 5px #222;
-        }
-        
-        #left-panel-hd {
-            width: 240px;
-            height: 200px;
-            position: relative;
-            background: url(images/qiye.jpg) 0;
-            background-size: cover;
-        }
-        
-        #user-container {
-            width: 240px;
-            height: 200px;
-            position: relative;
-            background: hsla(0, 0%, 100%, .3);
-            overflow: hidden;
-        }
-        
-        #user-container::before {
-            background: url(images/qiye.jpg);
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            filter: blur(20px);
-            margin: -30px;
-        }
-        
-        .header-bd a {
-            color: #ffffff;
-        }
     </style>
 </head>
 
@@ -179,7 +106,7 @@
                 </div>
             </div>
             <div class="main-bd" style="display: block;">
-                <div class="page__bd">
+                <div class="page__bd" id="tiezi-list">
                     <div class="weui-panel weui-panel_access" style="margin:0.5em;">
                         <div class="weui-panel__bd">
                             <div class="weui_media_box weui_media_appmsg" style="padding: 5px 15px;">
