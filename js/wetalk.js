@@ -43,103 +43,76 @@ $(function() {
 });
 
 
-function getiezilist(params) {
+function gettiezilist() {
     $.ajax({
         type: 'get',
-        // data：{"fileId":file_id},
-        // url: HOSTURL + 'file/collection?fileId=' + file_id + '&_dataarea=gongqi',
+        // url: HOSTURL + ,
         async: false,
         success: function(data) {
             $("#tiezi-list").html("");
             var tiezilist = $("#tiezi-list");
-            tiezilist.append(
-                "<div class='weui-panel weui-panel_access' style='margin:0.5em;'>" +
-                "<div class='weui-panel__bd'>" <
-                div class = "weui_media_box weui_media_appmsg"
-                style = "padding: 5px 15px;" >
-                <
-                div class = "weui_media_hd"
-                style = "width:64px;height:64px;border-radius:64px" >
-                <
-                div style = "width:70px; height:70px;" >
-                <
-                div style = "width: 64px; height: 64px; float:left; border-radius: 50%; border: 3px solid #ffffff; overflow: hidden;" >
-                <
-                img src = "images/user.jpg"
-                width = "64"
-                height = "64" / >
-                <
-                /div> <
-                /div> <
-                /div> <
-                div class = "weui_media_bd" >
-                <
-                div class = "weui-flex" >
-                <
-                div class = "weui-flex__item" >
-                <
-                h4 class = "weui_media_title" > 用户名 < /h4> <
-                /div> <
-                div class = "weui-flex__item"
-                style = "color:#adabab;" >
-                <
-                i class = "iconfont" > & #xe610; < /i> <
-                a > 浙江省嘉兴市 < /a> <
-                /div> <
-                /div> <
-                div class = "weui-flex" >
-                <
-                a > 2018 - 01 - 01 00: 00: 00 < /a> <
-                /div> <
-                /div> <
-                /div> <
-                div class = "weui-media-box weui-media-box_text"
-                style = "padding: 10px 15px;" >
-                <
-                h4 class = "weui-media-box__title" > 标题 < /h4> <
-                p class = "weui-media-box__desc" > 桌布 * 2（ 正方形、 长方形）; 扫帚簸箕; 清洁球; 拖把; 水桶; 水盆; < /p> <
-                img src = "images/ppt.png"
-                style = "height: 64px;" >
-                <
-                /div> <
-                div class = "weui-media-box"
-                style = "height: 30px;padding: 5px 15px;" >
-                <
-                div class = "weui_media_bd" >
-                <
-                div class = "weui-flex" >
-                <
-                div class = "weui-flex__item"
-                style = "text-align: left;" >
-                <
-                a href = ""
-                style = "" > < i class = "iconfont"
-                style = "font-size: 18px;" > & #xe815; < /i>收藏</a >
-                <
-                /div> <
-                div class = "weui-flex__item"
-                style = "text-align: center;" >
-                <
-                a style = "" >
-                <
-                i class = "iconfont"
-                style = "font-size: 20px;color: #a3a3a3;" > & #xe79f; < /i>1 <
-                /a> <
-                /div> <
-                div class = "weui-flex__item"
-                style = "text-align: right;" >
-                <
-                a href = ""
-                style = "" > < i class = "iconfont"
-                style = "font-size: 18px;" > & #xe63a; < /i>收藏</a >
-                <
-                /div> <
-                /div> <
-                /div> <
-                /div> <
-                /div> <
-                /div>
-            );
+            for (var i = 0; i < 4; i++) {
+                var username = "用户名";
+                var dingwei = " 浙江省嘉兴市"
+                var fatietime = "2018-01-01 00:00:00";
+                var title = "标题";
+                var tiezitext = "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊";
+                var pinglunnum = "1";
+                tiezilist.append(
+                    "<div class='weui-panel weui-panel_access' style='margin:0.5em;'>" +
+                    "<div class='weui-panel__bd'>" +
+                    "<div class='weui_media_box weui_media_appmsg' style='padding: 5px 15px;'>" +
+                    "<div class='weui_media_hd' style='width:64px;height:64px;border-radius:64px'>" +
+                    "<div style='width:70px; height:70px;'>" +
+                    "<div style='width: 64px; height: 64px; float:left; border-radius: 50%; border: 3px solid #ffffff; overflow: hidden;'>" +
+                    "<img src='images/user.jpg' width='64' height='64' />" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='weui_media_bd'>" +
+                    "<div class='weui-flex'>" +
+                    "<div class='weui-flex__item'>" +
+                    "<h4 class='weui_media_title'>" + username + "</h4>" +
+                    "</div>" +
+                    "<div class='weui-flex__item' style='color:#adabab;'>" +
+                    "<i class='iconfont'>&#xe610;</i>" +
+                    "<a>" + dingwei + "</a>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='weui-flex'>" +
+                    " <a>" + fatietime + "</a>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='weui-media-box weui-media-box_text' style='padding: 10px 15px;'>" +
+                    "<h4 class='weui-media-box__title'>" + title + "</h4>" +
+                    "<p class='weui-media-box__desc'>" + tiezitext + "</p>" +
+                    "<img src='images/ppt.png' style='height: 64px;padding: 5px;'>" +
+                    "</div>" +
+                    "<div class='weui-media-box' style='height: 30px;padding: 5px 15px;'>" +
+                    "<div class='weui_media_bd'>" +
+                    "<div class='weui-flex'>" +
+                    "<div class='weui-flex__item' style='text-align: left;'>" +
+                    "<a href='' style=''><i class='iconfont' style='font-size: 18px;'>&#xe815;</i>收藏</a>" +
+                    "</div>" +
+                    "<div class='weui-flex__item' style='text-align: center;'>" +
+                    "<a>" +
+                    "<i class='iconfont' style='font-size: 20px;color: #a3a3a3;'>&#xe79f;</i>" + pinglunnum +
+                    "</a>" +
+                    "</div>" +
+                    "<div class='weui-flex__item' style='text-align: right;'>" +
+                    "<a href='' style=''><i class='iconfont' style='font-size: 18px;'>&#xe63a;</i>收藏</a>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>"
+                );
+            }
+        },
+        complete: function() {
+
         },
         error: function() {
             alert("连接失败");
