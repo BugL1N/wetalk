@@ -42,6 +42,31 @@ $(function() {
     });
 });
 
+/*显示今日访客、今日话题、话题总数的数量 */
+
+function getstatistics() {
+    $.ajax({
+        type: "get",
+        asunc: false,
+        success: function(data) {
+            var todayvisitor = "11";
+            var todayhuati = "2";
+            var huaticount = "4";
+            $("#todayvisitor").text(todayvisitor);
+            $("#todayhuati").text(todayhuati);
+            $("#huaticount").text(huaticount);
+        },
+        complete: function() {
+
+        },
+        error: function() {
+
+        }
+
+    });
+}
+
+/* 加载帖子列表 */
 
 function gettiezilist() {
     $.ajax({
@@ -52,14 +77,18 @@ function gettiezilist() {
             $("#tiezi-list").html("");
             var tiezilist = $("#tiezi-list");
             for (var i = 0; i < 4; i++) {
+                var dianzan = "false";
+                var shoucang = "false";
+                var tieziId = "T10086" + i;
                 var username = "用户名";
-                var dingwei = " 浙江省嘉兴市"
+                var dingwei = "浙江嘉兴" + i;
                 var fatietime = "2018-01-01 00:00:00";
                 var title = "标题";
                 var tiezitext = "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊";
                 var pinglunnum = "1";
+                var imageurl = "images/ppt.png";
                 tiezilist.append(
-                    "<div class='weui-panel weui-panel_access' style='margin:0.5em;'>" +
+                    "<div class='weui-panel weui-panel_access' style='margin:0.5em;border-radius: 5px;'>" +
                     "<div class='weui-panel__bd'>" +
                     "<div class='weui_media_box weui_media_appmsg' style='padding: 5px 15px;'>" +
                     "<div class='weui_media_hd' style='width:64px;height:64px;border-radius:64px'>" +
@@ -74,8 +103,8 @@ function gettiezilist() {
                     "<div class='weui-flex__item'>" +
                     "<h4 class='weui_media_title'>" + username + "</h4>" +
                     "</div>" +
-                    "<div class='weui-flex__item' style='color:#adabab;'>" +
-                    "<i class='iconfont'>&#xe610;</i>" +
+                    "<div class='weui-flex__item dingweiitem' style='color:#adabab;' id='dingwei' data-dingwei='" + dingwei + "'>" +
+                    "<i class='iconfont'>&#xe610; </i>" +
                     "<a>" + dingwei + "</a>" +
                     "</div>" +
                     "</div>" +
@@ -84,24 +113,26 @@ function gettiezilist() {
                     "</div>" +
                     "</div>" +
                     "</div>" +
-                    "<div class='weui-media-box weui-media-box_text' style='padding: 10px 15px;'>" +
+                    "<div class='weui-media-box weui-media-box_text tiezicontent'  style='padding: 10px 15px;' id='tiezi-content' data-tieziId ='" + tieziId + "'>" +
                     "<h4 class='weui-media-box__title'>" + title + "</h4>" +
                     "<p class='weui-media-box__desc'>" + tiezitext + "</p>" +
-                    "<img src='images/ppt.png' style='height: 64px;padding: 5px;'>" +
+                    "<img src='" + imageurl + "' style='height: 64px;padding: 5px;'>" +
                     "</div>" +
                     "<div class='weui-media-box' style='height: 30px;padding: 5px 15px;'>" +
                     "<div class='weui_media_bd'>" +
                     "<div class='weui-flex'>" +
-                    "<div class='weui-flex__item' style='text-align: left;'>" +
-                    "<a href='' style=''><i class='iconfont' style='font-size: 18px;'>&#xe815;</i>收藏</a>" +
+                    "<div class='weui-flex__item shoucangitem' style='text-align: left;' data-shoucang='" + shoucang + "'>" +
+                    "<a class='shoucang' style='display:block;'><i class='iconfont' style='font-size: 18px;'>&#xe815;</i>收藏</a>" +
+                    "<a class='quxiaoshoucang' style='display:;'><i class='iconfont' style='font-size: 18px;'>&#xe815;</i>取消收藏</a>" +
                     "</div>" +
-                    "<div class='weui-flex__item' style='text-align: center;'>" +
+                    "<div class='weui-flex__item pingluniten' style='text-align: center;'>" +
                     "<a>" +
                     "<i class='iconfont' style='font-size: 20px;color: #a3a3a3;'>&#xe79f;</i>" + pinglunnum +
                     "</a>" +
                     "</div>" +
-                    "<div class='weui-flex__item' style='text-align: right;'>" +
-                    "<a href='' style=''><i class='iconfont' style='font-size: 18px;'>&#xe63a;</i>收藏</a>" +
+                    "<div class='weui-flex__item dianzanitem' style='text-align: right;' data-dianzan='" + dianzan + "'>" +
+                    "<a class='dianzan' style='display:;'><i class='iconfont' style='font-size: 18px;'>&#xe63a;</i>点赞</a>" +
+                    "<a class='quxiaodianzan' style='display:block;'><i class='iconfont' style='font-size: 18px;'>&#xe63a;</i>取消点赞</a>" +
                     "</div>" +
                     "</div>" +
                     "</div>" +
@@ -109,10 +140,61 @@ function gettiezilist() {
                     "</div>" +
                     "</div>"
                 );
+                // console.log(dingwei);
+                // if (dingwei == "浙江嘉兴1") {
+                //     $("#dignwei").hide();
+                // }
+                var datashoucang = $(".shoucangitem").attr("data-shoucang");
+                if (datashoucang == "true") {
+                    $(".shoucang").hide();
+                    $(".quxiaoshoucang").show();
+                }
+                var datadianzan = $(".dianzanitem").attr("data-dianzan");
+                if (datadianzan == "true") {
+                    $(".dianzan").hide();
+                    $(".quxiaodianzan").show();
+                }
             }
         },
         complete: function() {
-
+            //点击帖子进入帖子详情页
+            $(".tiezicontent").bind('click').click(function() {
+                tieziid = $(this).attr("data-tieziId");
+                window.location.href = 'tiezidetailes.html?tieziId=' + tieziid;
+            });
+            //点击评论进入帖子详情页
+            $(".pingluniten").bind('click').click(function() {
+                tieziids = $(this).parents("#tiezi-content").attr("data-tieziId");
+                window.location.href = 'tiezidetailes.html?tieziId=' + tieziids;
+            });
+            //点击收藏、未收藏
+            $(".shoucangitem").bind('click').click(function() {
+                console.log("收藏");
+                datashoucang = $(this).attr("data-shoucang");
+                if (datashoucang == "false") {
+                    $(this).find(".shoucang").hide();
+                    $(this).find(".quxiaoshoucang").show();
+                    $(this).attr("data-shoucang", "true");
+                } else {
+                    $(this).find(".shoucang").show();
+                    $(this).find(".quxiaoshoucang").hide();
+                    $(this).attr("data-shoucang", "false");
+                }
+            });
+            //点击点赞、取消点赞
+            $(".dianzanitem").bind('click').click(function() {
+                console.log("点赞");
+                var datadianzan = $(this).attr("data-dianzan");
+                if (datadianzan == "false") {
+                    $(this).find(".dianzan").hide();
+                    $(this).find(".quxiaodianzan").show();
+                    $(this).attr("data-dianzan", "true");
+                } else {
+                    $(this).find(".dianzan").show();
+                    $(this).find(".quxiaodianzan").hide();
+                    $(this).attr("data-dianzan", "false");
+                }
+            });
         },
         error: function() {
             alert("连接失败");

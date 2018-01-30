@@ -48,8 +48,8 @@
         </div>
     </div>
     <!-- 右边主界面 -->
-    <div class="page" style="">
-        <div id="container-main" class="page page-current" style="">
+    <div class="page">
+        <div id="container-main" class="page page-current">
             <div class="main-hd" style="height: 150px;">
                 <div class="weui-flex" style="width: 100%;height: 50px;">
                     <div class="weui-flex" style="width: 100%;">
@@ -86,19 +86,19 @@
                     <div class="weui-flex" style="height: 70px;padding-top: 5px;">
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;border-right: 1px solid #E8E8E8;">
-                                <a href="">1</a>
+                                <a href="" id="todayvisitor">0</a>
                                 <p style="font-size: 16px;">今日访问</p>
                             </div>
                         </div>
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;border-right: 1px solid #E8E8E8;">
-                                <a href="">2</a>
+                                <a href="" id="todayhuati">0</a>
                                 <p>今日话题</p>
                             </div>
                         </div>
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;">
-                                <a href="">3</a>
+                                <a href="" id="huaticount">0</a>
                                 <p>话题总数</p>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
             </div>
             <div class="main-bd" style="display: block;">
                 <div class="page__bd" id="tiezi-list">
-                    <div class="weui-panel weui-panel_access" style="margin:0.5em;">
+                    <div class="weui-panel weui-panel_access" style="margin:0.5em;border-radius: 5px;">
                         <div class="weui-panel__bd">
                             <div class="weui_media_box weui_media_appmsg" style="padding: 5px 15px;">
                                 <div class="weui_media_hd" style="width:64px;height:64px;border-radius:64px">
@@ -385,6 +385,7 @@
     <script src="js/url.js"></script>
     <script>
         $(function() {
+            getstatistics();
             gettiezilist();
         });
         $("#left-panel-link").bind('click').click(function() {
@@ -394,7 +395,7 @@
             } else {
                 $("#container-main").addClass("posit_flix");
             }
-        })
+        });
         $('#left-panel-link').panelslider();
     </script>
     <script src="js/wetalk.js"></script>
