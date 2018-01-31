@@ -45,7 +45,7 @@
     width: 240px;
     height: 200px;
     position: relative;
-    background: url(../images/qiye.jpg) 0;
+    /* background: url(../images/qiye.jpg) 0; */
     background-size: cover;
 }
 
@@ -58,7 +58,7 @@
 }
 
 #user-container::before {
-    background: url(../images/qiye.jpg);
+    /* background: url(../images/qiye.jpg); */
     content: '';
     position: absolute;
     top: 0;
