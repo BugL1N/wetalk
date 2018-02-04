@@ -13,6 +13,19 @@
         body {
             background-color: #EFEFF5;
         }
+        
+        #test {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            display: none;
+        }
     </style>
 </head>
 
@@ -49,6 +62,7 @@
     </div>
     <!-- 右边主界面 -->
     <div class="page">
+        <div id="test" onclick="removeflix()"></div>
         <div id="container-main" class="page page-current">
             <div class="main-hd" style="height: 150px;">
                 <div class="weui-flex" style="width: 100%;height: 50px;">
@@ -74,7 +88,7 @@
                         <div>
                             <div class="placeholder">
                                 <div class="header-hd" style="text-align: center;padding-right: 10px;">
-                                    <a id="" href="fatie.html" style="font-size: 30px;">
+                                    <a id="" href="createtopic.html" style="font-size: 30px;">
                                         <i class="iconfont" style="font-size: 26px;color:#FFFFFF;">&#xe6fd;</i>
                                     </a>
                                 </div>
@@ -86,19 +100,19 @@
                     <div id="tognji-container" class="weui-flex" style="height: 70px;padding-top: 5px;">
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;border-right: 1px solid #E8E8E8;">
-                                <a href="" id="todayvisitor">0</a>
+                                <a id="todayvisitor">0</a>
                                 <p style="font-size: 16px;">今日访问</p>
                             </div>
                         </div>
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;border-right: 1px solid #E8E8E8;">
-                                <a href="" id="todayhuati">0</a>
+                                <a id="todayhuati">0</a>
                                 <p>今日话题</p>
                             </div>
                         </div>
                         <div class="weui-flex__item" style="text-align: center;">
                             <div style="height:50px;margin-top: 10px;">
-                                <a href="" id="huaticount">0</a>
+                                <a id="huaticount">0</a>
                                 <p>话题总数</p>
                             </div>
                         </div>
@@ -119,35 +133,12 @@
     <div id="left-panel" class="panel" style="display: none;">
         <div style="height: 100%;background-color: #DEDEDE;width: 240px;">
             <div id="userinfo-container">
-                <!-- <div id="left-panel-hd">
-                    <div id="user-container"> -->
-                <!-- <div id="" style="padding-top: 100px;display: inline-block;width: 100%;">
-                        <div class="weui_panel_bd page__bd_spacing">
-                            <div class="weui_media_box weui_media_appmsg" style="padding:5px;">
-                                <div class="weui_media_hd">
-                                    <div style="width:70px; height:70px;">
-                                        <div style="width: 64px; height: 64px; float:left; border-radius: 50%; border: 3px solid #eee; overflow: hidden;">
-                                            <img src="images/qiye.jpg" width="64" height="64" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="weui_media_bd">
-                                    <h5 class="weui_media_title">用户名</h5>
-                                    <div class="weui-flex">
-                                        <h5>体验用户</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
 
-                <!-- </div>
-                </div> -->
             </div>
 
 
             <div class="weui-cells" style="margin-top:5px;">
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="talk.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width:20px;margin-right:9px;">&#xe613;</i>
                     </div>
@@ -165,7 +156,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <!-- <a class="weui-cell weui-cell_access" href="javascript:;">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width:20px;margin-right:9px;">&#xe600;</i>
                     </div>
@@ -173,8 +164,8 @@
                         <p>管理员</p>
                     </div>
                     <div class="weui-cell__ft"></div>
-                </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                </a> -->
+                <a class="weui-cell weui-cell_access" href="owntopics.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width:20px;margin-right:9px;">&#xe629;</i>
                     </div>
@@ -183,7 +174,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="replytopics.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width:20px;margin-right:9px;">&#xe606;</i>
                     </div>
@@ -192,7 +183,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="backtopics.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width:20px;margin-right:9px;">&#xe60a;</i>
                     </div>
@@ -201,7 +192,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="collectiontopics.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width: 25px;margin-right: 9px;">&#xe816;</i>
                     </div>
@@ -210,7 +201,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="praisetopics.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width: 25px;margin-right: 9px;">&#xe603;</i>
                     </div>
@@ -219,7 +210,7 @@
                     </div>
                     <div class="weui-cell__ft"></div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="createtopic.html">
                     <div class="weui-cell__hd">
                         <i class="iconfont" style="color: #59CAC6;width: 25px;margin-right: 9px;">&#xe6fd;</i>
                     </div>
@@ -237,12 +228,13 @@
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/jquery.panelslider.min.js"></script>
     <script src="js/url.js"></script>
+    <script src="js/weui.min.js"></script>
     <script>
         $(function() {
-            // getstatistics();
             gettiezilist();
         });
         $("#left-panel-link").bind('click').click(function() {
+            $("#test").show();
             var display = $("#left-panel").css("display");
             if (display == "block") {
                 $("#container-main").removeClass("posit_flix");
@@ -250,6 +242,11 @@
                 $("#container-main").addClass("posit_flix");
             }
         });
+
+        function removeflix() {
+            $("#test").hide();
+            $("#container-main").removeClass("posit_flix");
+        }
         $('#left-panel-link').panelslider();
     </script>
     <script src="js/wetalk.js"></script>

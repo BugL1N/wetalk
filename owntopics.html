@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="css/weui.css">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/wetalk.css">
+    <link rel="stylesheet" type="text/css" href="css/font-face.css">
+    <title>我发表的</title>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: "微软雅黑";
+            /* background-color: #EEEEEE; */
+            background-color: #EFEFF5;
+        }
+        
+        .weui_panel {
+            /* background-color: #FFFFFF; */
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        
+        .weui_cell_bd p {
+            color: #565656;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loadingToast" class="weui_loading_toast" style="display: none;">
+        <div class="weui_mask_transparent"></div>
+        <div class="weui_toast">
+            <div class="weui_loading">
+                <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+            </div>
+            <p class="weui_toast_content">数据加载中</p>
+        </div>
+    </div>
+    <div class="weui_dialog_alert" id="requestErrorDialog" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">数据访问错误</strong></div>
+            <div class="weui_dialog_bd" id="requestErrorMsg"></div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui_dialog_alert" id="erwei" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd">
+                <img id="scan" width="200px;" />
+            </div>
+
+            <div class="weui_dialog_ft">
+                <a href="javascript:hideer();" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="container" style="padding-bottom: 50px;margin: 5px;">
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd" style="background-color: #EFEFF5;padding:5px 15px;">
+                <div class="weui-flex">
+                    <div class="weui-flex__item">
+                        <h3>我发表的话题(<span id="collention-num">-</span>)</h3>
+                    </div>
+                    <!-- <div class="weui-flex__item" style="">
+                        <div class="weui-flex" style="float: right;">
+                            <div class="weui-flex__item" id="btn-bianji" style="display: block;">
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 6px;;border-radius: 20px;border: 1px solid #B7B4AD;">编辑</a>
+                            </div>
+                            <div class="weui-flex__item" id="btn-wancheng" style="display:none;">
+                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="font-size: 6px;;border-radius: 20px;border: 1px solid #B7B4AD;">完成</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="weui-panel__bd" style="background-color: #FAFAFA;" id="mycollection-content">
+
+            </div>
+            <!-- <div class="weui-panel__ft ">
+                <a href="javascript:void(0); " class="weui-cell weui-cell_access weui-cell_link ">
+                    <div class="weui-cell__bd ">查看更多</div>
+                    <span class="weui-cell__ft "></span>
+                </a>
+            </div> -->
+        </div>
+    </div>
+
+
+    <script src="js/jquery-1.11.0.min.js "></script>
+    <script src="js/url.js "></script>
+    <script src="js/wetalk.js "></script>
+    <script>
+        $(function() {
+            getowntopics();
+        })
+    </script>
+
+</body>
+
+</html>

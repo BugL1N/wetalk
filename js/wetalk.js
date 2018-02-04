@@ -42,6 +42,7 @@ $(function() {
     });
 });
 
+
 /*显示今日访客、今日话题、话题总数的数量 */
 
 // function getstatistics() {
@@ -74,14 +75,22 @@ $(function() {
 function collection(tieziId, temp) {
     $.ajax({
         type: 'post',
-        URL: HOSTURL + 'topics/collection?topicId=' + tieziId + '&_dataarea=gongqi',
+        URL: HOSTURL + 'topics/collection?topicId=' + tieziId + '&type=0&_dataarea=gongqi',
         async: false,
         success: function(data) {
             if (data.errcode == 0) {
-                alert("收藏成功");
+                weui.toast('收藏成功', 3000);
                 temp = 1;
             } else {
-                alert("收藏失败，请重试");
+                weui.dialog({
+                    content: '收藏失败',
+                    className: 'custom-classname',
+                    buttons: [{
+                        label: '确定',
+                        type: 'primary',
+                    }]
+                });
+
                 temp = 0;
             }
         },
@@ -100,10 +109,17 @@ function praise(tieziId, temp) {
         async: false,
         success: function(data) {
             if (data.errcode == 0) {
-                alert("点赞成功");
+                weui.toast('点赞成功', 3000);
                 temp = 1;
             } else {
-                alert("点赞失败，请重试");
+                weui.dialog({
+                    content: '点赞失败',
+                    className: 'custom-classname',
+                    buttons: [{
+                        label: '确定',
+                        type: 'primary',
+                    }]
+                });
                 temp = 0;
             }
         },
@@ -118,7 +134,7 @@ function praise(tieziId, temp) {
 function gettiezilist() {
     $.ajax({
         type: 'get',
-        // url: HOSTURL + ,
+        // url: HOSTURL+'topic/topics?startIndex='+ '0' +'&_dataarea=gongqi'
         url: 'js/topics.json',
         async: false,
         success: function(data) {
@@ -261,12 +277,12 @@ function gettiezilist() {
             //点击帖子进入帖子详情页
             $(".tiezicontent").bind('click').click(function() {
                 tieziid = $(this).attr("data-tieziId");
-                window.location.href = 'tiezidetailes.html?tieziId=' + tieziid;
+                window.location.href = 'topicdetails.html?topicId=' + tieziid;
             });
             //点击评论进入帖子详情页
             $(".pingluniten").bind('click').click(function() {
                 tieziids = $(this).parents("#tiezi-content").attr("data-tieziId");
-                window.location.href = 'tiezidetailes.html?tieziId=' + tieziids;
+                window.location.href = 'topicdetails.html?topicId=' + tieziids;
             });
             //点击收藏、未收藏
             $(".shoucangitem").bind('click').click(function() {
@@ -318,19 +334,485 @@ function gettiezilist() {
 }
 
 
+//话题详情
 function gettiezidetailes() {
+    var parentId = "";
+    var parentId = GetQueryString("topicId"); //这个方法获取当前页面的url参数
+    if (parentId == null) {
+        parentId = "";
+    }
     $.ajax({
         type: 'get',
-        // url: HOSTURL+"",
-        url: 'js/gettiezidetailes.json',
+        // url: HOSTURL+'topic/detail?topicId='+ parentId +'&_dataarea=gongqi',
+        url: 'js/tiezidetailes.json',
         dataType: 'json',
         async: false,
         success: function(data) {
             if (data.errcode == 0) {
-                $("")
+                var data_ = data.content;
+                var topicstext = data_.content;
+                var topicsId = data_.topicId;
+                var topicstitle = data_.title;
+                var userimg = data_.headImg;
+                var username = data_.name;
+                var topicstime = data_.releaseDate + " " + data_.releaseTime;
+                var topicsaddress = data_.address;
+                var topicsown = data_.own;
+                $("#topics-content").html("");
+                var topicscontent = $("#topics-content");
+                topicscontent.append(
+                    "<div class='weui_media_box weui_media_appmsg'>" +
+                    "<div class='weui_media_hd' style='width:64px;height:64px;border-radius:64px'>" +
+                    "<div style='width:70px; height:70px;'>" +
+                    "<div style='width: 64px; height: 64px; float:left; border-radius: 50%; border: 3px solid #ffffff; overflow: hidden;'>" +
+                    "<img src='" + userimg + "' width='64' height='64' />" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='weui_media_bd'>" +
+                    "<div class='weui-flex'>" +
+                    "<div class='weui-flex__item'>" +
+                    "<h4 class='weui_media_title'>" + username + "</h4>" +
+                    "</div>" +
+                    "<div class='weui-flex__item' id='topicsaddress-" + topicsId + "'>" +
+                    "<i class='iconfont'>&#xe610;</i>" +
+                    "<a>" + topicsaddress + "</a>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='weui-flex'>" +
+                    "<div class='weui-flex__item'>" +
+                    "<a>" + topicstime + "</a>" +
+                    "</div>" +
+                    "<div id='delete-topics' style='display:none;'>" +
+                    "<div class='placeholder'>" +
+                    "<a style='color:#ff0000'>" + "删除" + "</a>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class='weui-media-box weui-media-box_text'>" +
+                    "<h4 class='weui-media-box__title'>" + topicstitle + "</h4>" +
+                    "<p class=''>" + topicstext + "</p>" +
+                    "</div>" +
+                    "<div class='weui-media-box'>" +
+                    "<div class='weui_media_bd'>" +
+                    " <div class='weui-flex'>" +
+                    "<div class='weui-flex__item' style='text-align: right;'>" +
+                    "<img src=''>" +
+                    "<a href='' style='padding-right: 10%;'>dianzan</a>" +
+                    "<img src=''>" +
+                    "</div>" +
+                    "<div class='weui-flex__item'>" +
+                    "<img src=''>" +
+                    "<a href='' style='padding-left: 10%;'>shoucang</a>" +
+                    "<img src=''>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>"
+                );
+                if (topicsaddress == "") {
+                    $("#topicsaddress-" + topicsId).hide();
+                }
+                if (topicsown == true) {
+                    $("#delete-topics").show();
+                }
+                $("#reply-content").html("");
+                var replycontent = $("#reply-content");
+                var _data = data.content.reply;
+                for (var i = 0; i < data.content.reply.length; i++) {
+                    var replyusername = _data[i].name;
+                    var replyuserimg = _data[i].headImg;
+                    var replytime = _data[i].releaseDate + " " + _data[i].releaseTime;
+                    var replytext = _data[i].content;
+                    replycontent.append(
+                        "<div class='weui-media-box weui-media-box_appmsg'>" +
+                        "<div class='weui-media-box__hd' style='width:60px;height:60px;border-radius:60px'>" +
+                        "<div style='width:70px; height:70px;'>" +
+                        "<div style='width: 60px; height: 60px; float:left; border-radius: 50%; border: 3px solid #ffffff; overflow: hidden;'>" +
+                        "<img src='" + replyuserimg + "' width='64' height='64' />" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<div class='weui-flex'>" +
+                        "<div class='weui-flex__item' style='text-align: left;'>" +
+                        "<h4>" + replyusername + "</h4>" +
+                        "</div>" +
+                        "</div>" +
+                        "<a>" + replytime + "</a>" +
+                        "<p class='' style='text-align: left;'>" + replytext + "</p>" +
+                        "</div>" +
+                        "<div class='weui-media-box__ft'>" +
+                        "<div class='delete-reply' style='display:none;'><i class='iconfont'>&#xe627;</i></div>" +
+                        "<i class='iconfont'>&#xe66f;</i>" +
+                        "</div>" +
+                        "</div>"
+                    );
+                    if (topicsown == true) {
+                        $(".delete-reply").show();
+                    }
+                }
             } else {
 
             }
+        },
+        complete: function() {
+            $("#delete-topics").bind('click').click(function() {
+                weui.dialog({
+                    // title: 'dialog标题',
+                    content: '确认要删除该话题吗？',
+                    className: 'custom-classname',
+                    buttons: [{
+                        label: '取消',
+                        type: 'default',
+                        onClick: function() { alert('取消删除') }
+                    }, {
+                        label: '确定',
+                        type: 'primary',
+                        onClick: function() { alert('确认删除') }
+                    }]
+                });
+            });
+            $(".delete-reply").bind('click').click(function() {
+                // var replyId = $(this).
+                weui.dialog({
+                    content: '确认要删除该评论吗？',
+                    className: 'custom-classname',
+                    buttons: [{
+                        label: '取消',
+                        type: 'default',
+                        onClick: function() { alert('取消删除') }
+                    }, {
+                        label: '确定',
+                        type: 'primary',
+                        onClick: function() { alert('确认删除') }
+                    }]
+                });
+            });
+        },
+        error: function() {
+
+        }
+
+    });
+}
+
+/*我发表的 */
+
+function getowntopics() {
+    $.ajax({
+        tupe: 'get',
+        // url: HOSTURL+'topic/ownTopics?startIndex='+ '0' +'&_dataarea=gongqi'
+        url: 'js/topics.json',
+        dataType: 'json',
+        success: function(data) {
+            if (data.errcode == 0) {
+                $("#mycollection-content").html("");
+                var mycollectioncontent = $("#mycollection-content");
+                var collectionnum = "3";
+                $("#collention-num").text(collectionnum);
+                for (var i = 0; i < collectionnum; i++) {
+                    var username = "发起人";
+                    var topicstime = "发起时间";
+                    var replynum = "回复数量";
+                    var topicstitle = "标题二标题二标题二标题二标题二标题二标题二标题二标题二标题二";
+                    mycollectioncontent.append(
+                        "<a href='" + "http://www.baidu.com" + "' class='weui-media-box weui-media-box_appmsg'>" +
+                        "<div class='weui-media-box__hd bianji' style='display: none;width: 10%;'>QAQ</div>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<h4 class='title' style='color:#619A4F;font-size: 16px;'>" + topicstitle + "</h4>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<div class='weui-flex__item'>" + username + "</div>" +
+                        "<div class='weui-flex__item' style='float: right;'>" +
+                        "<div class='weui-flex' style='text-align: center;'>" +
+                        "<div class='weui-flex__item'>" + topicstime + "</div>" +
+                        "<div class='weui-flex__item'>" + replynum + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>"
+                    );
+                }
+            } else {
+
+            }
+        },
+        complete: function() {
+            $(".bianji").unbind('click').click(function(event) {
+                console.log("删除该话题");
+                event.preventDefault();
+            });
+        },
+        error: function() {
+
+        }
+
+    });
+}
+
+function getbacktopics() {
+    $.ajax({
+        tupe: 'get',
+        // url: HOSTURL+'topic/backTopics?startIndex='+ '0' +'&_dataarea=gongqi'
+        url: 'js/topics.json',
+        dataType: 'json',
+        success: function(data) {
+            if (data.errcode == 0) {
+                $("#backtopics-content").html("");
+                var backtopicscontent = $("#backtopics-content");
+                var backtopicsnum = "3";
+                $("#collention-num").text(backtopicsnum);
+                for (var i = 0; i < backtopicsnum; i++) {
+                    var username = "发起人";
+                    var topicstime = "发起时间";
+                    var replynum = "回复数量";
+                    var topicstitle = "标题二标题二标题二标题二标题二标题二标题二标题二标题二标题二";
+                    backtopicscontent.append(
+                        "<a href='" + "http://www.baidu.com" + "' class='weui-media-box weui-media-box_appmsg'>" +
+                        "<div class='weui-media-box__hd bianji' style='display: none;width: 10%;'>QAQ</div>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<h4 class='weui-media-box__title' style='color:#555555;font-size: 16px;'>“" + "大扎好，我系轱天乐，我四渣渣辉，探挽懒月，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款游戏。" + "”</h4>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<p style='font-size: 16px;color:#000000;'>【<strong>" + topicstitle + "</strong>】<P>" +
+                        "</div>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<div class='weui-flex__item'> " + "username" + "</div>" +
+                        "<div class='weui-flex__item' style='text-align:right;'> " + "time" + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>"
+                    );
+                }
+            } else {
+
+            }
+        },
+        complete: function() {
+            $(".bianji").unbind('click').click(function(event) {
+                console.log("删除该话题");
+                event.preventDefault();
+            });
+        },
+        error: function() {
+
+        }
+
+    });
+}
+
+function getbackreplys() {
+    $.ajax({
+        tupe: 'get',
+        // url: HOSTURL+'topic/backReplys?startIndex='+ '0' +'&_dataarea=gongqi'
+        url: 'js/topics.json',
+        dataType: 'json',
+        success: function(data) {
+            if (data.errcode == 0) {
+                $("#backreplys-content").html("");
+                var backreplyscontent = $("#backreplys-content");
+                var backreplysnum = "3";
+                $("#backreplys-num").text(backreplysnum);
+                for (var i = 0; i < backreplysnum; i++) {
+                    var username = "回复人";
+                    var topicstime = "回复时间";
+                    // var replynum = "回复数量";
+                    var myreplycontent = "我的评论内容";
+                    backreplyscontent.append(
+                        "<a href='" + "http://www.baidu.com" + "' class='weui-media-box weui-media-box_appmsg'>" +
+                        // "<div class='weui-media-box__hd bianji' style='display: none;width: 10%;'>QAQ</div>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<h4 class='weui-media-box__title' style='color:#555555;font-size: 16px;'>“" + "大扎好，我系轱天乐，我四渣渣辉，探挽懒月，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款游戏。" + "”</h4>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<p style='font-size: 16px;color:#000000;'>【<strong>" + myreplycontent + "</strong>】<P>" +
+                        "</div>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<div class='weui-flex__item'> " + "username" + "</div>" +
+                        "<div class='weui-flex__item' style='text-align:right;'> " + "time" + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>"
+                    );
+                }
+            } else {
+
+            }
+        },
+        complete: function() {
+            $(".bianji").unbind('click').click(function(event) {
+                console.log("删除该话题");
+                event.preventDefault();
+            });
+        },
+        error: function() {
+
+        }
+
+    });
+}
+
+/*我评论的*/
+
+function getreplytopics() {
+    $.ajax({
+        tupe: 'get',
+        // url: HOSTURL+'topic/replyTopics?startIndex='+ '0' +'&_dataarea=gongqi'
+        url: 'js/topics.json',
+        dataType: 'json',
+        success: function(data) {
+            if (data.errcode == 0) {
+                $("#mycollection-content").html("");
+                var mycollectioncontent = $("#mycollection-content");
+                var collectionnum = "3";
+                $("#collention-num").text(collectionnum);
+                for (var i = 0; i < collectionnum; i++) {
+                    var username = "发起人";
+                    var topicstime = "发起时间";
+                    var replynum = "回复数量";
+                    var topicstitle = "标题二标题二标题二标题二标题二标题二标题二标题二标题二标题二";
+                    mycollectioncontent.append(
+                        "<a href='" + "http://www.baidu.com" + "' class='weui-media-box weui-media-box_appmsg'>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<h4 class='weui-media-box__title' style='color:#555555;font-size: 16px;'>“" + "大扎好，我系轱天乐，我四渣渣辉，探挽懒月，介四里没有挽过的船新版本，挤需体验三番钟，里造会干我一样，爱象节款游戏。" + "”</h4>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<p style='font-size: 16px;color:#000000;'>【<strong>" + topicstitle + "</strong>】<P>" +
+                        "</div>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<div class='weui-flex__item'> " + "username" + "</div>" +
+                        "<div class='weui-flex__item' style='text-align:right;'> " + "time" + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>"
+                    );
+                }
+            } else {
+
+            }
+        },
+        complete: function() {},
+        error: function() {
+
+        }
+
+    });
+}
+
+/*我的点赞 */
+
+function getpraisetopics() {
+    $.ajax({
+        tupe: 'get',
+        // url: HOSTURL+'topic/praiseTopics?startIndex='+ '0' +'&_dataarea=gongqi',
+        url: 'js/topics.json',
+        dataType: 'json',
+        success: function(data) {
+            if (data.errcode == 0) {
+                $("#mycollection-content").html("");
+                var mycollectioncontent = $("#mycollection-content");
+                var collectionnum = "3";
+                $("#collention-num").text(collectionnum);
+                for (var i = 0; i < collectionnum; i++) {
+                    var username = "发起人";
+                    var topicstime = "发起时间";
+                    var replynum = "回复数量";
+                    var topicstitle = "标题二标题二标题二标题二标题二标题二标题二标题二标题二标题二";
+                    mycollectioncontent.append(
+                        "<a href='" + "http://www.baidu.com" + "' class='weui-media-box weui-media-box_appmsg'>" +
+                        "<div class='weui-media-box__hd bianji' style='display: none;width: 10%;'><i class='iconfont'>&#xe601;</i></div>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<h4 class='title' style='color:#619A4F;font-size: 16px;'>" + topicstitle + "</h4>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<div class='weui-flex__item'>" + username + "</div>" +
+                        "<div class='weui-flex__item' style='float: right;'>" +
+                        "<div class='weui-flex' style='text-align: center;'>" +
+                        "<div class='weui-flex__item'>" + topicstime + "</div>" +
+                        "<div class='weui-flex__item'>" + replynum + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>"
+                    );
+                }
+            } else {
+
+            }
+        },
+        complete: function() {
+            $(".bianji").unbind('click').click(function(event) {
+                console.log("删除该话题");
+                event.preventDefault();
+            });
+        },
+        error: function() {
+
+        }
+
+    });
+}
+
+function getmycollection() {
+    $.ajax({
+        tupe: 'get',
+        // url: HOSTURL+'topic/collectionTopics?startIndex='+ '0' +'&_dataarea=gongqi',
+        url: 'js/topics.json',
+        dataType: 'json',
+        success: function(data) {
+            if (data.errcode == 0) {
+                $("#mycollection-content").html("");
+                var mycollectioncontent = $("#mycollection-content");
+                var collectionnum = "3";
+                $("#collention-num").text(collectionnum);
+                for (var i = 0; i < collectionnum; i++) {
+                    var username = "发起人";
+                    var topicstime = "发起时间";
+                    var replynum = "回复数量";
+                    var topicstitle = "标题二标题二标题二标题二标题二标题二标题二标题二标题二标题二";
+                    mycollectioncontent.append(
+                        "<a href='" + "http://www.baidu.com" + "' class='weui-media-box weui-media-box_appmsg'>" +
+                        "<div class='weui-media-box__hd bianji' style='display: none;width: 10%;'>QAQ</div>" +
+                        "<div class='weui-media-box__bd'>" +
+                        "<h4 class='title' style='color:#619A4F;font-size: 16px;'>" + topicstitle + "</h4>" +
+                        "<div class='weui-flex' style='color:#B7B4AD'>" +
+                        "<div class='weui-flex__item'>" + username + "</div>" +
+                        "<div class='weui-flex__item' style='float: right;'>" +
+                        "<div class='weui-flex' style='text-align: center;'>" +
+                        "<div class='weui-flex__item'>" + topicstime + "</div>" +
+                        "<div class='weui-flex__item'>" + replynum + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</a>"
+                    );
+                }
+            } else {
+
+            }
+        },
+        complete: function() {
+            $(".bianji").unbind('click').click(function(event) {
+                weui.dialog({
+                    // title: 'dialog标题',
+                    content: '确认要取消收藏此话题吗？',
+                    className: 'custom-classname',
+                    buttons: [{
+                        label: '取消',
+                        type: 'default',
+                        onClick: function() { alert('取消操作') }
+                    }, {
+                        label: '确定',
+                        type: 'primary',
+                        onClick: function() { alert('取消收藏') }
+                    }]
+                });
+                event.preventDefault();
+            });
         },
         error: function() {
 

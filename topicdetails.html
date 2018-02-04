@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="css/weui.css">
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/wetalk.css">
+    <link rel="stylesheet" type="text/css" href="css/font-face.css">
+    <title>帖子详情</title>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: "微软雅黑";
+            background-color: #EEEEEE;
+        }
+        
+        .weui_panel {
+            background-color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        
+        .weui_cell_bd p {
+            color: #565656;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loadingToast" class="weui_loading_toast" style="display: none;">
+        <div class="weui_mask_transparent"></div>
+        <div class="weui_toast">
+            <div class="weui_loading">
+                <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+            </div>
+            <p class="weui_toast_content">数据加载中</p>
+        </div>
+    </div>
+    <div class="weui_dialog_alert" id="requestErrorDialog" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">数据访问错误</strong></div>
+            <div class="weui_dialog_bd" id="requestErrorMsg"></div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui_dialog_alert" id="erwei" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd">
+                <img id="scan" width="200px;" />
+            </div>
+
+            <div class="weui_dialog_ft">
+                <a href="javascript:hideer();" class="weui_btn_dialog primary">确定</a>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="container" style="padding-bottom: 50px;margin: 5px;">
+        <div class="weui_panel weui_panel_access">
+            <div class="weui_panel_bd page__bd_spacing">
+                <div id="topics-content">
+
+                </div>
+
+                <div class="weui-media-box" style="background-color: #EEEEEE;">
+
+                </div>
+
+                <div class="weui-form-preview" style="display: block;">
+                    <div class="weui-form-preview__hd" style="text-align: left;" id="comment_header">
+                        <ul class="box" style="list-style: none;">
+                            <li style="float: left;padding-right: 10px;">
+                                <a href="javascript:;" id="qiye"><span>评论(2)</span></a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" id="mycol"><span>点赞(1)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="reply-content" class="weui-form-preview__bd" style="text-align: left;display: block;padding:5px;">
+
+                    </div>
+                    <!-- <div id="praise-content" class="weui-form-preview__bd" style="text-align: left;display: block;padding:5px;">
+
+                    </div> -->
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- 评论框 -->
+    <div class="comment_box" style="display: block;">
+        <div class="comment_container">
+            <div class="comment_item1">
+                <div class="comment_item_t1">
+                    <a href="#" class="button">
+                        <i class="iconfont">&#xe671;</i>
+                    </a>
+                </div>
+            </div>
+            <div class="comment_item2">
+                <div class="comment_item_t2">
+                    <input type="" name="" id="talking">
+                </div>
+            </div>
+            <div class="comment_item3">
+                <div class="comment_item_t3">
+                    <a href="#" class="button " onclick="">发送</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/url.js"></script>
+    <script src="js/wetalk.js"></script>
+    <script src="js/weui.min.js"></script>
+    <script>
+        $(function() {
+            gettiezidetailes();
+        })
+    </script>
+
+</body>
+
+</html>

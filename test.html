@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="a">3</li>
+        <li class="a">4</li>
+        <li class="a">5</li>
+        <li class="a">6</li>
+        <li class="a">7</li>
+    </ul>
+    <button id="bbb">aaa</button>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#bbb").click(function() {
+        var a = $(".a");
+        console.log(a);
+        a.eq(-1).remove();
+        $("ul").prepend(
+            "<li class='a'>我是新来的，_(:з」∠)_" + Math.random() + ",你好</li>"
+        )
+    })
+</script>
+
+</html>
