@@ -123,6 +123,10 @@
                 <div class="page__bd" id="tiezi-list">
 
                 </div>
+                <div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                </div>
             </div>
             <div class="mina-ft">
 
@@ -229,10 +233,28 @@
     <script src="js/jquery.panelslider.min.js"></script>
     <script src="js/url.js"></script>
     <script src="js/weui.min.js"></script>
+    <script src="js\jquery-weui.min.js"></script>
     <script>
         $(function() {
-            gettiezilist();
+            // $("#user-container").html("");
+            $("#tiezi-list").html("");
+            gettiezilist(0);
+            $(document.body).infinite(100);
         });
+
+        var loading = false; //状态标记
+        var startindex = 0;
+        $(document.body).infinite().on("infinite", function() {
+            if (loading) return;
+            loading = true;
+            startindex += 10;
+            setTimeout(function() {
+                $("#tiezi-list").append("<p> 我是新加载的内容 </p>");
+                gettiezilist(startindex);
+                loading = false;
+            }, 1500); //模拟延迟
+        });
+
         $("#left-panel-link").bind('click').click(function() {
             $("#test").show();
             var display = $("#left-panel").css("display");

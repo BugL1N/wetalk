@@ -69,6 +69,49 @@ $(function() {
 
 //     });
 // }
+/* 发表 */
+function create() {
+    var title = "ლ(′◉❥◉｀ლ)";
+    var content = "(#^.^#)";
+    var location = 1;
+    var addr = "火星";
+    var employeeIds = "";
+    var departmentIds = "";
+    var remindDepartmentIds = "";
+    var remindEmployeeIds = "";
+    var anonymity = 0;
+    $.ajax({
+        type: 'post',
+        url: HOSTURL + 'topic/create&_dataarea=gongqi',
+        dataType: 'json',
+        data: {
+            title: title,
+            content: content,
+            location: location,
+            addr: addr,
+            employeeIds: employeeIds,
+            departmentIds: departmentIds,
+            remindEmployeeIds: remindEmployeeIds,
+            remindDepartmentIds: remindDepartmentIds,
+            anonymity: anonymity
+        },
+        cache: false,
+        traditional: true,
+        success: function(data) {
+            if (data.errcode == 0) {
+                console.log("成功");
+                window.location.href = "talk.html";
+            } else {
+                console.log("失败");
+            }
+        },
+        errror: function() {
+            console.log("失败");
+        }
+
+    });
+}
+
 
 /*收藏操作 */
 
@@ -129,9 +172,8 @@ function praise(tieziId, temp) {
     });
 }
 
-/* 加载首页帖子列表和用户信息 */
-
-function gettiezilist() {
+/*加载左侧用户信息 */
+function getuserinfo() {
     $.ajax({
         type: 'get',
         // url: HOSTURL+'topic/topics?startIndex='+ '0' +'&_dataarea=gongqi'
@@ -181,9 +223,34 @@ function gettiezilist() {
                 $("#todayhuati").text(allsize);
                 $("#huaticount").text(topicsize);
 
-                $("#tiezi-list").html("");
+            }
+
+        },
+        complete: function() {
+
+        },
+        error: function() {
+            alert("连接失败");
+        }
+    });
+}
+
+
+/* 加载首页帖子列表*/
+
+function gettiezilist(startindex) {
+    $.ajax({
+        type: 'get',
+        // url: HOSTURL+'topic/topics?startIndex='+ '0' +'&_dataarea=gongqi'
+        url: 'js/topics.json',
+        async: false,
+        success: function(data) {
+            if (data.errcode == 0) {
+
+                // $("#tiezi-list").html("");
                 var tiezilist = $("#tiezi-list");
                 var data_ = data.content.topiclist;
+                console.log(data.content.topiclist.length);
                 for (var i = 0; i < data.content.topiclist.length; i++) {
                     var dianzan = data_[i].praise;
                     var shoucang = data_[i].collect;
